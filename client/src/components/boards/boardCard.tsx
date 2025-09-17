@@ -1,6 +1,6 @@
 "use client";
 
-import { Pin, PinOff, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 interface BoardCardProps {
   board: {
@@ -24,33 +24,29 @@ export default function BoardCard({
   return (
     <div
       onClick={() => openBoard(board.id)}
-      className="relative min-w-[250px] h-36 rounded-xl shadow-md 
-    bg-background-alt hover:bg-border-hover transition cursor-pointer 
-    flex flex-col group overflow-hidden"
+      className="relative min-w-[250px] h-36 rounded-2xl shadow-lg
+  bg-white/10 backdrop-blur-xl hover:bg-white/20 transition-all duration-300
+  cursor-pointer flex flex-col group overflow-hidden"
     >
       <button
         onClick={(e) => {
           e.stopPropagation();
           togglePin(board.id);
         }}
-        className={`absolute top-2 right-2 p-1 rounded-md 
-    bg-black/40 backdrop-blur-sm transition z-10
+        className={`absolute top-2 right-2 p-2 rounded-xl
+   backdrop-blur-md inner-border shadow-sm
+    transition-all duration-200 z-10
     ${board.pinned ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
       >
         {board.pinned ? (
-          <Star
-            className="w-5 h-5 text-yellow-400 fill-yellow-400 transition-transform duration-200 ease-out 
-        hover:scale-120"
-          />
+          <Star className="w-5 h-5 text-yellow-400 fill-yellow-400 drop-shadow" />
         ) : (
-          <Star
-            className="w-5 h-5 text-gray-400 transition-transform duration-200 ease-out 
-        hover:scale-120 hover:text-yellow-400"
-          />
+          <Star className="w-5 h-5 text-gray-300 hover:text-yellow-300 transition-colors" />
         )}
       </button>
 
-      <div className="h-2/3 relative w-full rounded-t-xl overflow-hidden">
+      {/* Background wrapper */}
+      <div className="relative w-full h-full rounded-2xl overflow-hidden">
         {board.background ? (
           board.background.type === "color" ? (
             <div
@@ -71,12 +67,19 @@ export default function BoardCard({
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
-      </div>
 
-      <div className="h-1/3 flex px-3 pb-3 items-end">
-        <p className="font-semibold text-lg text-white truncate">
-          {board.name || "Untitled Board"}
-        </p>
+        {/* 👇 inner-border overlay goes ABOVE background */}
+        <div className="inner-border-overlay rounded-2xl" />
+
+        {/* Gradient + title bar */}
+        <div className="absolute inset-x-0 bottom-0">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          <div className="relative bg-white/20 backdrop-blur-md px-3 py-2">
+            <p className="font-semibold text-lg text-white truncate drop-shadow">
+              {board.name || "Untitled Board"}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

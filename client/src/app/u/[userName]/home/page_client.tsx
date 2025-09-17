@@ -2,6 +2,7 @@
 
 import BoardCardSmall from "@/components/boards/boardCardSmall";
 import Sidebar from "@/components/navigation/sidebar";
+import EventCard from "@/components/tasks/eventCard";
 import { auth } from "@/lib/firebase";
 import { getBoardInfo, getUserBoards, openBoard } from "@/lib/helper";
 import { onAuthStateChanged, signOut, User } from "@firebase/auth";
@@ -97,11 +98,10 @@ export default function HomePage({ userName }: HomePageProps) {
                 <Calendar className="inline-block w-4 h-4 mr-2" />
                 Upcoming Deadlines
               </h3>
-              <ul className="space-y-2 text-gray-300 text-sm">
-                <li className="flex items-center gap-2">
-                  <span>No upcoming deadlines.</span>
-                </li>
-              </ul>
+              <div className="flex flex-col gap-4 pb-2">
+                <EventCard eventName="Design Review" />
+                <EventCard eventName="Sprint Planning" />
+              </div>
             </section>
 
             <section>

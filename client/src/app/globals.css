@@ -3,6 +3,7 @@
 :root {
   --background: #f9fafb;
   --background-alt: #ffffff;
+  --background-selected: #806aec;
 
   --foreground: #171717;
   --foreground-muted: #6b7280;
@@ -22,8 +23,11 @@
 @theme inline {
   --color-background: var(--background);
   --color-background-alt: var(--background-alt);
+  --color-background-selected: var(--background-selected);
+
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
+  
   --color-border: var(--border);
   --color-border-hover: var(--border-hover);
 
@@ -42,26 +46,49 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #201E25;
-    --background-alt: #2F2D34;
+    /* Backgrounds */
+    --background: #1a1b1e;          /* Main app background */
+    --background-alt: #24262b;      /* Surfaces (cards, modals) */
+    --background-selected: #3b82f6; /* Bright accent for selection/focus */
 
-    --foreground: #f3f4f6;
-    --foreground-muted: #9ca3af;
+    /* Foreground (text & icons) */
+    --foreground: #f9fafb;          /* Primary text */
+    --foreground-muted: #9ca3af;    /* Secondary text */
 
-    --border: #39383E;
-    --border-hover: #4B494F;
+    /* Borders */
+    --border: #2e3036;              /* Subtle border */
+    --border-hover: #3f424a;        /* Hover border */
 
-    --accent: #2F2F31;
-    --accent-contrast: #373739;
-    --accent-hover: #323232;
+    /* Accent colors */
+    --accent: #3b82f6;              /* Vibrant primary (blue) */
+    --accent-contrast: #2563eb;     /* Stronger contrast for hover/active */
+    --accent-hover: #60a5fa;        /* Softer hover state */
+    
+    /* Success / Warning / Error (optional but useful in dashboards) */
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --error: #ef4444;
   }
 }
+
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   transition: background 0.2s ease, color 0.2s ease;
+}
+
+.inner-border {
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.3);
+}
+
+.inner-border-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.3);
 }
 
 button,

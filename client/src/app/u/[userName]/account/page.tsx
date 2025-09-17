@@ -14,11 +14,14 @@ import { useRouter } from "next/navigation";
 import Sidebar from "@/components/navigation/sidebar";
 import { CircleUser, Pen } from "lucide-react";
 
-interface DashboardPageProps {
-  userName: string;
+interface AccountPageProps {
+  params: {
+    userName: string;
+  };
 }
 
-export default function AccountPage({ userName }: DashboardPageProps) {
+export default function AccountPage({ params }: AccountPageProps) {
+  const { userName } = params;
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
 
